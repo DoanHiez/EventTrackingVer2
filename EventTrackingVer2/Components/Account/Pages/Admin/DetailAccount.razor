@@ -1,0 +1,221 @@
+﻿@page "/Account/DetailAccount/{UserId}"
+@attribute [Authorize(Roles = "Admin")]
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Identity
+@using EventTrackingVer2.Data
+@using Microsoft.EntityFrameworkCore
+
+@inject RoleManager<IdentityRole> RoleManager
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IdentityUserAccessor UserAccessor
+@inject IdentityRedirectManager RedirectManager
+@inject ILogger<Index> Logger
+
+<PageTitle>User information</PageTitle>
+
+<div class="edit-container">
+    <div class="edit-box">
+
+        <h1>User information</h1>
+
+        <StatusMessage />
+
+        <EditForm Model="Input" FormName="profile-form" OnValidSubmit="OnValidSubmitAsync" method="post">
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert" />
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <InputText @bind-Value="Input.UserName" class="form-control" />
+                        <label>User Name</label>
+                    </div>
+                    <ValidationMessage For="() => Input.UserName" class="text-danger" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <InputText @bind-Value="Input.Email" class="form-control" />
+                        <label>Email</label>
+                    </div>
+                    <ValidationMessage For="() => Input.Email" class="text-danger" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <InputText @bind-Value="Input.PhoneNumber" class="form-control" />
+                        <label>Phone Number</label>
+                    </div>
+                    <ValidationMessage For="() => Input.PhoneNumber" class="text-danger" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <InputSelect @bind-Value="Input.Sex" class="form-select">
+                            <option value="">-- Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </InputSelect>
+                    </div>
+                    <ValidationMessage For="() => Input.Sex" class="text-danger" />
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <div class="form-floating">
+                        <InputText @bind-Value="Input.Address" class="form-control" />
+                        <label>Address</label>
+                    </div>
+                    <ValidationMessage For="() => Input.Address" class="text-danger" />
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <div class="form-floating">
+                        <InputSelect class="form-control" @bind-Value="Input.Role">
+                            <option value="">-- select role --</option>
+                            @foreach (var r in Roles)
+                            {
+                                <option value="@r.Id">@r.Name</option>
+                            }
+                        </InputSelect>
+                        <label>Role</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="w-100 btn btn-lg btn-primary mt-3">Save</button>
+        </EditForm>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public string UserId { get; set; } = string.Empty;
+
+    private ApplicationUser user = default!;
+    private string? statusMessage;
+
+    private List<IdentityRole> Roles = new();
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm]
+    private InputModel Input { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        user = await UserManager.FindByIdAsync(UserId);
+        if (user == null)
+        {
+            statusMessage = "User not found.";
+            return;
+        }
+
+
+        if (Input.UserName == null)
+        {
+            Roles = await RoleManager.Roles.ToListAsync();
+
+            Input.UserName =  user.UserName;
+            Input.Email = user.Email;
+            Input.PhoneNumber = user.PhoneNumber;
+            Input.Sex = user.Sex;
+            Input.Address = user.Address;
+            if (user != null)
+            {
+                var userRoles = await UserManager.GetRolesAsync(user);
+                if (userRoles.Any())
+                {
+                    var newRole = await RoleManager.FindByNameAsync(userRoles.First());
+                    if (newRole != null)
+                    {
+                        Input.Role = newRole.Id;
+                    }
+                }
+            }
+        }
+    }
+
+    private async Task OnValidSubmitAsync()
+    {
+
+        // Handle updates for Sex and Address first
+        var success = await UpdateAdditionalUserInfoAsync();
+        if (!success)
+        {
+            return;
+        }
+
+        var setUserNameResult = await UserManager.SetUserNameAsync(user, Input.UserName);
+        if (!setUserNameResult.Succeeded)
+        {
+            // RedirectManager.RedirectToCurrentPageWithStatus("Cập nhật họ tên thất bại.", HttpContext);
+            return;
+        }
+
+        var setPhoneResult = await UserManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+        if (!setPhoneResult.Succeeded)
+        {
+            // RedirectManager.RedirectToCurrentPageWithStatus("Cập nhật số điện thoại thất bại.", HttpContext);
+            return;
+        }
+
+        var setEmailResult = await UserManager.SetEmailAsync(user, Input.Email);
+        if (!setEmailResult.Succeeded)
+        {
+            // RedirectManager.RedirectToCurrentPageWithStatus("Cập nhật email thất bại.", HttpContext);
+            return;
+        }
+
+        var newrole = await RoleManager.FindByIdAsync(Input.Role);
+
+        //find the role(s) of current user
+        var currentRoles = await UserManager.GetRolesAsync(user);
+
+        await UserManager.RemoveFromRolesAsync(user, currentRoles);
+        await UserManager.AddToRoleAsync(user, newrole.Name);
+        // If all updates were successful, redirect with success message
+        RedirectManager.RedirectToCurrentPageWithStatus("User information updated successfully.", HttpContext);
+    }
+
+
+    private async Task<bool> UpdateAdditionalUserInfoAsync()
+    {
+        bool changed = false;
+
+        if (Input.Sex != user.Sex)
+        {
+            user.Sex = Input.Sex;
+            changed = true;
+        }
+
+        if (Input.Address != user.Address)
+        {
+            user.Address = Input.Address;
+            changed = true;
+        }
+        return true;
+
+
+    }
+
+    private sealed class InputModel
+    {
+        [Required]
+        public string? UserName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string? Email { get; set; }
+
+        [Phone]
+        public string? PhoneNumber { get; set; }
+
+        public string Sex { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string Role { get; set; }
+    }
+}

@@ -1,0 +1,225 @@
+﻿@page "/Account/AccountManagement"
+@attribute [Authorize(Roles = "Admin")]
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using EventTrackingVer2.Data
+@inject UserManager<ApplicationUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+<h3 class="text-center my-4">User Management</h3>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <div class="alert alert-info">@statusMessage</div>
+}
+
+@if (usersWithRoles.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in usersWithRoles)
+            {
+                <tr>
+                    <td>@user.User.UserName</td>
+                    <td>@user.User.Email</td>
+                    <td>@user.User.PhoneNumber</td>
+                    <td>
+                        <a class="btn btn-link fw-bold" href="/Account/DetailAccount/@user.User.Id">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="/Account/Manage/DeletePersonalData/@user.User.Id" class="btn btn-link text-danger fw-bold">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Loading user list...</p>
+}
+
+@if (selectedUser != null)
+{
+    <EditForm Model="@selectedUser" OnValidSubmit="OnSaveUserEdit">
+        <DataAnnotationsValidator />
+        <ValidationSummary class="text-danger" />
+
+        <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit User Information</h5>
+                        <button type="button" class="btn-close" @onclick="HideUserModal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <InputText class="form-control" @bind-Value="selectedUser.UserName" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <InputText class="form-control" @bind-Value="selectedUser.Email" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <InputText class="form-control" @bind-Value="selectedUser.PhoneNumber" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <InputText class="form-control" @bind-Value="selectedUser.Sex" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <InputText class="form-control" @bind-Value="selectedUser.Address" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" @onclick="HideUserModal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    private string statusMessage = "";
+    private List<string> allRoles = new();
+    private List<UserWithRole> usersWithRoles = new();
+    private ApplicationUser? selectedUser;
+    private DummyModel dummy = new();
+    private class DummyModel { }
+    private string? deleteUserId;
+
+    public class UserWithRole
+    {
+        public ApplicationUser User { get; set; } = default!;
+        public string SelectedRole { get; set; } = "";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var users = await UserManager.Users.ToListAsync();
+        allRoles = await RoleManager.Roles.Select(r => r.Name!).ToListAsync();
+
+        foreach (var user in users)
+        {
+            var roles = await UserManager.GetRolesAsync(user);
+            usersWithRoles.Add(new UserWithRole
+            {
+                User = user,
+                SelectedRole = roles.FirstOrDefault() ?? ""
+            });
+        }
+    }
+
+    private async Task OnRoleChangedAsync(ChangeEventArgs e, UserWithRole user)
+    {
+        user.SelectedRole = e.Value?.ToString() ?? "";
+        await UpdateUserRoleAsync(user);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task UpdateUserRoleAsync(UserWithRole userWithRole)
+    {
+        var currentRoles = await UserManager.GetRolesAsync(userWithRole.User);
+
+        if (currentRoles.Any())
+        {
+            var removeResult = await UserManager.RemoveFromRolesAsync(userWithRole.User, currentRoles);
+            if (!removeResult.Succeeded)
+            {
+                statusMessage = $"Error deleting old role: {string.Join(", ", removeResult.Errors.Select(e => e.Description))}";
+                return;
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(userWithRole.SelectedRole))
+        {
+            var addResult = await UserManager.AddToRoleAsync(userWithRole.User, userWithRole.SelectedRole);
+            if (!addResult.Succeeded)
+            {
+                statusMessage = $"Error adding new role: {string.Join(", ", addResult.Errors.Select(e => e.Description))}";
+                return;
+            }
+        }
+
+        statusMessage = $"Updated role for {userWithRole.User.UserName} to: {userWithRole.SelectedRole}";
+    }
+    private async Task OnSaveUserEdit()
+    {
+        if (selectedUser != null)
+        {
+            var userInDb = await UserManager.FindByIdAsync(selectedUser.Id);
+            if (userInDb != null)
+            {
+                userInDb.UserName = selectedUser.UserName;
+                userInDb.Email = selectedUser.Email;
+                userInDb.PhoneNumber = selectedUser.PhoneNumber;
+                userInDb.Sex = selectedUser.Sex;
+                userInDb.Address = selectedUser.Address;
+
+                var result = await UserManager.UpdateAsync(userInDb);
+                statusMessage = result.Succeeded
+                    ? "User information updated."
+                    : $"Error: {string.Join("; ", result.Errors.Select(e => e.Description))}";
+            }
+
+            selectedUser = null;
+        }
+    }
+
+    private void OnSubmitShowUser(ApplicationUser user)
+    {
+        selectedUser = user;
+    }
+
+    private void HideUserModal()
+    {
+        selectedUser = null;
+    }
+    private void ConfirmDeleteUser(string userId)
+    {
+        deleteUserId = userId;
+    }
+
+    private void CancelDelete()
+    {
+        deleteUserId = null;
+    }
+
+    private async Task DeleteUserConfirmed()
+    {
+        if (!string.IsNullOrEmpty(deleteUserId))
+        {
+            var user = await UserManager.FindByIdAsync(deleteUserId);
+            if (user != null)
+            {
+                var result = await UserManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    statusMessage = $"User '{user.UserName}' has been deleted.";
+                    usersWithRoles.RemoveAll(u => u.User.Id == deleteUserId);
+                }
+                else
+                {
+                    statusMessage = $"Error deleting user: {string.Join(", ", result.Errors.Select(e => e.Description))}";
+                }
+            }
+        }
+
+        deleteUserId = null;
+    }
+}

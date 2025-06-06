@@ -1,0 +1,131 @@
+﻿@inherits LayoutComponentBase
+@implements IDisposable
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<div class="d-flex flex-column min-vh-100">
+
+    <header class="shadow-sm bg-white">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+            <div class="logo">
+                <img src="/image/logoAET1.jpg" alt="Logo" style="height: 40px;" />
+            </div>
+            <AuthorizeView>
+                <Authorized>
+                    <div class="d-flex align-items-center gap-2">
+                        <NavLink class="text-dark fw-bold text-decoration-none" href="Account/Manage">
+                            @context.User.Identity?.Name
+                        </NavLink>
+                        <form action="Account/Logout" method="post" class="mb-0">
+                            <AntiforgeryToken />
+                            <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                            <button type="submit" class="btn-login">Log Out</button>
+                        </form>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <NavLink class="btn-login" href="Account/Login">Log In</NavLink>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </header>
+
+    <nav class="bg-light border-bottom">
+        <div class="container d-flex justify-content-center gap-4 py-2">
+            
+            <NavLink class="nav-link text-dark fw-bold" href="" Match="NavLinkMatch.All">Home</NavLink>
+            <AuthorizeView>
+                <Authorized>
+                    <div class="nav-item dropdown custom-hover-dropdown position-relative">
+                        <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" role="button">
+                            Events
+                        </a>
+                        <ul class="dropdown-menu shadow-sm border-0 rounded-3">
+                            <li>
+                                <NavLink class="dropdown-item" href="/events-register">Event Registration</NavLink>
+                            </li>
+                            <li>
+                                <NavLink class="dropdown-item" href="/events-list">Event List</NavLink>
+                            </li>
+                        </ul>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <!-- Không hiển thị gì -->
+                </NotAuthorized>
+            </AuthorizeView>
+            
+
+
+            
+            <NavLink class="nav-link text-dark fw-bold" href="contact">Contact</NavLink>
+            <NavLink class="nav-link text-dark fw-bold" href="about">About Us</NavLink>
+
+            <AuthorizeView Roles="Admin">
+                <Authorized>
+                    <div class="nav-item dropdown custom-hover-dropdown position-relative">
+                        <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" role="button">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu shadow-sm border-0 rounded-3">
+                            <li>
+                                <NavLink class="dropdown-item" href="/Account/AccountManagement">Account Management</NavLink>
+                            </li>
+                            <li>
+                                <NavLink class="dropdown-item" href="#">Event Management</NavLink>
+                            </li>
+                            <li>
+                                <NavLink class="dropdown-item" href="#">Statistical</NavLink>
+                            </li>
+
+                        </ul>
+                    </div>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1">
+        <div class="container py-4">
+            @Body
+        </div>
+    </main>
+
+
+    <footer class="bg-white border-top mt-auto py-3 small text-muted">
+        <div class="container text-center">
+            <div class="d-flex flex-column align-items-center gap-2">
+                <img src="/image/atc1.png" alt="Logo" style="height: 36px;" />
+                <div>
+                    <div>192/47 No Trang Long, Ward 7, Binh Thanh District, HCMC</div>
+                    <div>Phone: 0834 083 3017</div>
+                    <div>Email: <a href="mailto:kien.nguyen@anthanhcong.net" class="text-decoration-none text-muted">kien.nguyen@anthanhcong.net</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+</div>
+
+@code {
+    private string? currentUrl;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}

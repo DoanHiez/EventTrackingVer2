@@ -1,0 +1,257 @@
+﻿@page "/Account/Manage"
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Identity
+@using EventTrackingVer2.Data
+
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IdentityUserAccessor UserAccessor
+@inject IdentityRedirectManager RedirectManager
+@inject ILogger<Index> Logger
+
+<PageTitle>Profile</PageTitle>
+
+<div class="edit-container">
+    <div class="edit-box">
+        <h1>Profile</h1>
+
+        <StatusMessage />
+
+        <EditForm Model="Input" FormName="profile-form" OnValidSubmit="OnValidSubmitAsync" method="post">
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert" />
+
+            <div class="row">
+                <!-- Họ và tên -->
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <InputText @bind-Value="Input.UserName" class="form-control" />
+                        <label>User Name</label>
+                    </div>
+                    <ValidationMessage For="() => Input.UserName" class="text-danger" />
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <InputText @bind-Value="Input.Email" class="form-control" />
+                        <label>Email</label>
+                    </div>
+                    <ValidationMessage For="() => Input.Email" class="text-danger" />
+                </div>
+
+                <!-- Số điện thoại -->
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <InputText @bind-Value="Input.PhoneNumber" class="form-control" />
+                        <label>Phone Number</label>
+                    </div>
+                    <ValidationMessage For="() => Input.PhoneNumber" class="text-danger" />
+                </div>
+
+                <!-- Giới tính -->
+                <div class="col-md-6 mb-3">
+                    <div class="form-floating">
+                        <InputSelect @bind-Value="Input.Sex" class="form-select">
+                            <option value="">-- Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </InputSelect>
+                    </div>
+                    <ValidationMessage For="() => Input.Sex" class="text-danger" />
+                </div>
+
+                <!-- Địa chỉ -->
+                <div class="col-md-12 mb-3">
+                    <div class="form-floating">
+                        <InputText @bind-Value="Input.Address" class="form-control" />
+                        <label>Address</label>
+                    </div>
+                    <ValidationMessage For="() => Input.Address" class="text-danger" />
+                </div>
+
+                <!-- Mật khẩu cũ -->
+                <div class="col-md-4 mb-3">
+                    <div class="form-floating">
+                        <InputText type="password" @bind-Value="PasswordInput.OldPassword" class="form-control" placeholder="Nhập mật khẩu cũ" />
+                        <label>Old Password</label>
+                    </div>
+                    <ValidationMessage For="() => PasswordInput.OldPassword" class="text-danger" />
+                </div>
+
+                <!-- Mật khẩu mới -->
+                <div class="col-md-4 mb-3">
+                    <div class="form-floating">
+                        <InputText type="password" @bind-Value="PasswordInput.NewPassword" class="form-control" placeholder="Nhập mật khẩu mới" />
+                        <label>New Password</label>
+                    </div>
+                    <ValidationMessage For="() => PasswordInput.NewPassword" class="text-danger" />
+                </div>
+
+                <!-- Xác nhận mật khẩu -->
+                <div class="col-md-4 mb-3">
+                    <div class="form-floating">
+                        <InputText type="password" @bind-Value="PasswordInput.ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" />
+                        <label>ConfirmPassword</label>
+                    </div>
+                    <ValidationMessage For="() => PasswordInput.ConfirmPassword" class="text-danger" />
+                </div>
+            </div>
+
+            <button type="submit" class="w-100 btn btn-lg btn-primary mt-3">Save As</button>
+        </EditForm>
+
+        <div class="text-center mt-4">
+            <a href="/Account/Manage/DeletePersonalData" class="btn btn-link text-danger fw-bold">Delete Account!</a>
+        </div>
+    </div>
+</div>
+
+@code {
+    private ApplicationUser user = default!;
+    private string? message;
+    private string? userName;
+    private string? email;
+    private string? phoneNumber;
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm]
+    private InputModel Input { get; set; } = new();
+
+    [SupplyParameterFromForm]
+    private PasswordModel PasswordInput { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        userName = await UserManager.GetUserNameAsync(user);
+        email = await UserManager.GetEmailAsync(user);
+        phoneNumber = await UserManager.GetPhoneNumberAsync(user);
+
+        Input.UserName ??= userName;
+        Input.PhoneNumber ??= phoneNumber;
+        Input.Email ??= email;
+        Input.Sex = user.Sex;
+        Input.Address = user.Address;
+
+    }
+
+    private async Task OnValidSubmitAsync()
+    {
+
+        if (Input.UserName != userName)
+        {
+            var setUserNameResult = await UserManager.SetUserNameAsync(user, Input.UserName);
+            if (!setUserNameResult.Succeeded)
+            {
+                RedirectManager.RedirectToCurrentPageWithStatus("Name update failed.", HttpContext);
+            }
+        }
+
+        if (Input.PhoneNumber != phoneNumber)
+        {
+            var setPhoneResult = await UserManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            if (!setPhoneResult.Succeeded)
+            {
+                RedirectManager.RedirectToCurrentPageWithStatus("Phone number update failed.", HttpContext);
+            }
+        }
+
+        if (Input.Email != email)
+        {
+            var setEmailResult = await UserManager.SetEmailAsync(user, Input.Email);
+            if (!setEmailResult.Succeeded)
+            {
+                RedirectManager.RedirectToCurrentPageWithStatus("Email update failed.", HttpContext);
+            }
+        }
+
+        var success = await UpdateAdditionalUserInfoAsync();
+        if (!success)
+        {
+            return;
+        }
+
+        if (!string.IsNullOrWhiteSpace(PasswordInput.OldPassword) &&
+            !string.IsNullOrWhiteSpace(PasswordInput.NewPassword) &&
+            !string.IsNullOrWhiteSpace(PasswordInput.ConfirmPassword))
+        {
+            var resultPassword = await UserManager.ChangePasswordAsync(user, PasswordInput.OldPassword, PasswordInput.NewPassword);
+            if (!resultPassword.Succeeded)
+            {
+                message = string.Join("\n", resultPassword.Errors.Select(e => e.Description));
+                return;
+            }
+        }
+
+        await SignInManager.RefreshSignInAsync(user);
+    }
+
+    private async Task<bool> UpdateAdditionalUserInfoAsync()
+    {
+        bool changed = false;
+
+        if (Input.Sex != user.Sex)
+        {
+            user.Sex = Input.Sex;
+            changed = true;
+        }
+
+        if (Input.Address != user.Address)
+        {
+            user.Address = Input.Address;
+            changed = true;
+        }
+
+        if (changed)
+        {
+            var updateResult = await UserManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                Logger.LogError("Personal information update failed: {Errors}",
+                    string.Join("; ", updateResult.Errors.Select(e => e.Description)));
+
+                RedirectManager.RedirectToCurrentPageWithStatus("Gender/address update failed.", HttpContext);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private sealed class InputModel
+    {
+        [Required]
+        [Display(Name = "User mame")]
+        public string? UserName { get; set; }
+
+        [Phone]
+        [Display(Name = "Phone number")]
+        public string? PhoneNumber { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string? Email { get; set; }
+
+        public string Sex { get; set; }
+
+        public string Address { get; set; }
+    }
+    private sealed class PasswordModel
+    {
+        [DataType(DataType.Password)]
+        public string OldPassword { get; set; } = "";
+
+        [StringLength(100, MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; } = "";
+
+        [Compare("NewPassword", ErrorMessage = "Confirmation password does not match.")]
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; } = "";
+    }
+}

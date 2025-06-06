@@ -1,0 +1,154 @@
+﻿@page "/Account/Manage/PersonalData"
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using EventTrackingVer2.Data
+@inject UserManager<ApplicationUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+<h3 class="text-center my-4">Quản lý người dùng</h3>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <div class="alert alert-info">@statusMessage</div>
+}
+
+@if (usersWithRoles.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>NumberPhone</th>
+                <th>Role</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in usersWithRoles)
+            {
+                <tr>
+                    <td>@user.User.UserName</td>
+                    <td>@user.User.Email</td>
+                    <td>@user.User.PhoneNumber</td>
+                    <td>
+                        <select class="form-select" @onchange="async e => await OnRoleChangedAsync(e, user)">
+                            @foreach (var role in allRoles)
+                            {
+                                <option value="@role" selected="@(role == user.SelectedRole)">@role</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-success" @onclick="async () => await UpdateUserRoleAsync(user)">Cập nhật</button>
+                        <button class="btn btn-sm btn-outline-info" @onclick="() => ShowUserModal(user.User)">Chi tiết</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Đang tải danh sách người dùng...</p>
+}
+
+@if (selectedUser != null)
+{
+    <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông tin người dùng</h5>
+                    <button type="button" class="btn-close" @onclick="HideUserModal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Tên:</strong> @selectedUser.UserName</p>
+                    <p><strong>Email:</strong> @selectedUser.Email</p>
+                    <p><strong>SĐT:</strong> @selectedUser.PhoneNumber</p>
+                    <p><strong>Giới tính:</strong> @selectedUser.Sex</p>
+                    <p><strong>Địa chỉ:</strong> @selectedUser.Address</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" @onclick="HideUserModal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private string statusMessage = "";
+    private List<string> allRoles = new();
+    private List<UserWithRole> usersWithRoles = new();
+    private ApplicationUser? selectedUser;
+
+    public class UserWithRole
+    {
+        public ApplicationUser User { get; set; } = default!;
+        public string SelectedRole { get; set; } = "";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var users = await UserManager.Users.ToListAsync();
+        allRoles = await RoleManager.Roles.Select(r => r.Name!).ToListAsync();
+
+        foreach (var user in users)
+        {
+            var roles = await UserManager.GetRolesAsync(user);
+            usersWithRoles.Add(new UserWithRole
+            {
+                User = user,
+                SelectedRole = roles.FirstOrDefault() ?? ""
+            });
+        }
+    }
+
+    private async Task OnRoleChangedAsync(ChangeEventArgs e, UserWithRole user)
+    {
+        user.SelectedRole = e.Value?.ToString() ?? "";
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task UpdateUserRoleAsync(UserWithRole userWithRole)
+    {
+        var currentRoles = await UserManager.GetRolesAsync(userWithRole.User);
+
+        // Xoá các role hiện tại
+        if (currentRoles.Any())
+        {
+            var removeResult = await UserManager.RemoveFromRolesAsync(userWithRole.User, currentRoles);
+            if (!removeResult.Succeeded)
+            {
+                statusMessage = $"Error when deleting old role: {string.Join(", ", removeResult.Errors.Select(e => e.Description))}";
+                return;
+            }
+        }
+
+        // Thêm role mới
+        if (!string.IsNullOrWhiteSpace(userWithRole.SelectedRole))
+        {
+            var addResult = await UserManager.AddToRoleAsync(userWithRole.User, userWithRole.SelectedRole);
+            if (!addResult.Succeeded)
+            {
+                statusMessage = $"Error assigning new role: {string.Join(", ", addResult.Errors.Select(e => e.Description))}";
+                return;
+            }
+        }
+
+        statusMessage = $"Updated role to: {userWithRole.SelectedRole}";
+    }
+
+
+    private void ShowUserModal(ApplicationUser user)
+    {
+        selectedUser = user;
+    }
+
+    private void HideUserModal()
+    {
+        selectedUser = null;
+    }
+}

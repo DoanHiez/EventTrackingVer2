@@ -1,0 +1,70 @@
+﻿@page "/Account/Manage/DeletePersonalData/{UserId}"
+@attribute [Authorize(Roles = "Admin")]
+@using EventTrackingVer2.Components.Account.Pages.Manage
+@using Microsoft.AspNetCore.Identity
+@using EventTrackingVer2.Data
+
+@inject UserManager<ApplicationUser> UserManager
+@inject ILogger<DeletePersonalData> Logger
+@inject NavigationManager Navigation
+
+<PageTitle>Delete User</PageTitle>
+
+<h3 class="text-danger">Delete User</h3>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-warning">@message</div>
+}
+else if (user != null)
+{
+    <EditForm Model="dummy" OnValidSubmit="OnValidSubmitAsync" FormName="delete-user">
+        <div class="alert alert-danger" role="alert">
+            <p>
+                <strong>Are you sure you want to delete user <span class="fw-bold">@user.UserName</span>?<br />This action is permanent and cannot be undone.</strong>
+            </p>
+        </div>
+        <button type="submit" class="btn btn-danger">Yes, Delete User</button>
+        <a class="btn btn-secondary ms-2" href="/Account/AccountManagement">Cancel</a>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string UserId { get; set; } = default!;
+
+    private ApplicationUser? user;
+    private string? message;
+    private DeleteModel dummy = new(); // Dummy model để thỏa mãn EditForm yêu cầu
+
+    private class DeleteModel { }
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await UserManager.FindByIdAsync(UserId);
+        if (user == null)
+        {
+            message = "User not found.";
+        }
+    }
+
+    private async Task OnValidSubmitAsync()
+    {
+        if (user == null)
+        {
+            message = "User not found or already deleted.";
+            return;
+        }
+
+        var result = await UserManager.DeleteAsync(user);
+        if (result.Succeeded)
+        {
+            Logger.LogInformation("User with ID '{UserId}' was deleted by admin.", user.Id);
+            Navigation.NavigateTo("/Account/AccountManagement", forceLoad: true);
+        }
+        else
+        {
+            message = "Error deleting user: " + string.Join("; ", result.Errors.Select(e => e.Description));
+        }
+    }
+}
