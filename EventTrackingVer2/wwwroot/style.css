@@ -178,3 +178,11 @@
 	padding-top: 1rem !important;
 	padding-bottom: .625rem !important;
 }
+.email-card {
+	max-width: 1140px;
+	padding: 3rem;
+	border: none;
+	border-radius: 1rem;
+	background-color: #fff;
+	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}

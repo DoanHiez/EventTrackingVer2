@@ -2,7 +2,7 @@
 @implements IDisposable
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
-
+<RadzenComponents @rendermode="InteractiveServer" />
 <div class="d-flex flex-column min-vh-100">
 
     <header class="shadow-sm bg-white">
@@ -60,7 +60,7 @@
             
             <NavLink class="nav-link text-dark fw-bold" href="contact">Contact</NavLink>
             <NavLink class="nav-link text-dark fw-bold" href="about">About Us</NavLink>
-
+            <NavLink class="nav-link text-dark fw-bold" href="/email-template">Templete Email</NavLink>
             <AuthorizeView Roles="Admin">
                 <Authorized>
                     <div class="nav-item dropdown custom-hover-dropdown position-relative">

@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\EventTrackingVer2.csproj": {}
+    "C:\\code\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj": {}
   },
   "projects": {
-    "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\EventTrackingVer2.csproj": {
+    "C:\\code\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\EventTrackingVer2.csproj",
+        "projectUniqueName": "C:\\code\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj",
         "projectName": "EventTrackingVer2",
-        "projectPath": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\EventTrackingVer2.csproj",
-        "packagesPath": "C:\\Users\\DxHiez\\.nuget\\packages\\",
-        "outputPath": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\obj\\",
+        "projectPath": "C:\\code\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj",
+        "packagesPath": "C:\\Users\\duong\\.nuget\\packages\\",
+        "outputPath": "C:\\code\\EventTrackingVer02\\EventTrackingVer2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 24.1\\Components\\Offline Packages",
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DxHiez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\duong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 24.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -28,8 +28,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\DevExpress 24.1\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\DevExpress 24.1\\Components\\System\\Components\\packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,6 +68,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[8.0.16, )"
+            },
+            "Radzen.Blazor": {
+              "target": "Package",
+              "version": "[7.0.8, )"
             }
           },
           "imports": [
