@@ -1,12 +1,16 @@
 ﻿@page "/Account/AccountManagement"
 @attribute [Authorize(Roles = "Admin")]
-@using Microsoft.AspNetCore.Identity
-@using Microsoft.EntityFrameworkCore
-@using EventTrackingVer2.Data
-@inject UserManager<ApplicationUser> UserManager
-@inject RoleManager<IdentityRole> RoleManager
+@rendermode InteractiveServer
 
-<h3 class="text-center my-4">User Management</h3>
+@inherits AccountManagementBase
+
+<PageTitle>User Management</PageTitle>
+
+<h3 class="text-center my-4 fw-bold fs-3">User Management</h3>
+
+@* <div class="d-flex justify-content-end mb-3">
+    <input class="form-control w-25" placeholder="Search users..." @bind="searchTerm" @bind:event="oninput" />
+</div> *@
 
 @if (!string.IsNullOrEmpty(statusMessage))
 {
@@ -15,34 +19,24 @@
 
 @if (usersWithRoles.Count > 0)
 {
-    <table class="table table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in usersWithRoles)
-            {
-                <tr>
-                    <td>@user.User.UserName</td>
-                    <td>@user.User.Email</td>
-                    <td>@user.User.PhoneNumber</td>
-                    <td>
-                        <a class="btn btn-link fw-bold" href="/Account/DetailAccount/@user.User.Id">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                        <a href="/Account/Manage/DeletePersonalData/@user.User.Id" class="btn btn-link text-danger fw-bold">
-                            <i class="bi bi-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <RadzenDataGrid Data="@FilteredUsers" TItem="UserWithRole" ColumnWidth="200px" AllowFiltering="true" AllowPaging="false" AllowSorting="false">
+        <Columns>
+            <RadzenDataGridColumn TItem="UserWithRole" Property="User.UserName" Title="Username" Filterable="true" />
+            <RadzenDataGridColumn TItem="UserWithRole" Property="User.Email" Title="Email" Filterable="true" />
+            <RadzenDataGridColumn TItem="UserWithRole" Property="User.PhoneNumber" Title="Phone" Filterable="true" />
+            <RadzenDataGridColumn TItem="UserWithRole" Title="Role">
+                <Template Context="user">
+                    <RadzenDropDown Data="@allRoles" @bind-Value="user.SelectedRole" Style="width: 100%;" Change="@(async (object value) => await OnRoleChangedAsync(new ChangeEventArgs { Value = value }, user))" />
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="UserWithRole" Title="Action">
+                <Template Context="user">
+                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" class="rz-my-1 rz-ms-1" Click="@(args => OnSubmitShowUser(user.User))" @onclick:stopPropagation="true" />
+                    <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Size="ButtonSize.Medium" Shade="Shade.Lighter" class="rz-my-1 rz-ms-1" Click="@(args => DeleteUser(user.User.Id))" @onclick:stopPropagation="true" />
+                </Template>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
 }
 else
 {
@@ -51,20 +45,21 @@ else
 
 @if (selectedUser != null)
 {
-    <EditForm Model="@selectedUser" OnValidSubmit="OnSaveUserEdit">
-        <DataAnnotationsValidator />
-        <ValidationSummary class="text-danger" />
+    var formName = $"editForm_{selectedUser.Id}";
 
+    <EditForm Model="@selectedUser"
+              OnValidSubmit="OnSaveUserEdit"
+              FormName="@formName">
+        <DataAnnotationsValidator />
         <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit User Information</h5>
-                        <button type="button" class="btn-close" @onclick="HideUserModal" aria-label="Close"></button>
+                        <h5 class="text-center fw-bold fs-5">User information</h5>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label class="form-label">Username</label>
+                            <label class="form-label">User Name</label>
                             <InputText class="form-control" @bind-Value="selectedUser.UserName" />
                         </div>
                         <div class="mb-3">
@@ -77,7 +72,12 @@ else
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Gender</label>
-                            <InputText class="form-control" @bind-Value="selectedUser.Sex" />
+                            <InputSelect class="form-select" @bind-Value="selectedUser.Sex">
+                                <option value="">-- Gender --</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </InputSelect>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Address</label>
@@ -92,134 +92,4 @@ else
             </div>
         </div>
     </EditForm>
-}
-
-@code {
-    private string statusMessage = "";
-    private List<string> allRoles = new();
-    private List<UserWithRole> usersWithRoles = new();
-    private ApplicationUser? selectedUser;
-    private DummyModel dummy = new();
-    private class DummyModel { }
-    private string? deleteUserId;
-
-    public class UserWithRole
-    {
-        public ApplicationUser User { get; set; } = default!;
-        public string SelectedRole { get; set; } = "";
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var users = await UserManager.Users.ToListAsync();
-        allRoles = await RoleManager.Roles.Select(r => r.Name!).ToListAsync();
-
-        foreach (var user in users)
-        {
-            var roles = await UserManager.GetRolesAsync(user);
-            usersWithRoles.Add(new UserWithRole
-            {
-                User = user,
-                SelectedRole = roles.FirstOrDefault() ?? ""
-            });
-        }
-    }
-
-    private async Task OnRoleChangedAsync(ChangeEventArgs e, UserWithRole user)
-    {
-        user.SelectedRole = e.Value?.ToString() ?? "";
-        await UpdateUserRoleAsync(user);
-        await InvokeAsync(StateHasChanged);
-    }
-
-    private async Task UpdateUserRoleAsync(UserWithRole userWithRole)
-    {
-        var currentRoles = await UserManager.GetRolesAsync(userWithRole.User);
-
-        if (currentRoles.Any())
-        {
-            var removeResult = await UserManager.RemoveFromRolesAsync(userWithRole.User, currentRoles);
-            if (!removeResult.Succeeded)
-            {
-                statusMessage = $"Error deleting old role: {string.Join(", ", removeResult.Errors.Select(e => e.Description))}";
-                return;
-            }
-        }
-
-        if (!string.IsNullOrWhiteSpace(userWithRole.SelectedRole))
-        {
-            var addResult = await UserManager.AddToRoleAsync(userWithRole.User, userWithRole.SelectedRole);
-            if (!addResult.Succeeded)
-            {
-                statusMessage = $"Error adding new role: {string.Join(", ", addResult.Errors.Select(e => e.Description))}";
-                return;
-            }
-        }
-
-        statusMessage = $"Updated role for {userWithRole.User.UserName} to: {userWithRole.SelectedRole}";
-    }
-    private async Task OnSaveUserEdit()
-    {
-        if (selectedUser != null)
-        {
-            var userInDb = await UserManager.FindByIdAsync(selectedUser.Id);
-            if (userInDb != null)
-            {
-                userInDb.UserName = selectedUser.UserName;
-                userInDb.Email = selectedUser.Email;
-                userInDb.PhoneNumber = selectedUser.PhoneNumber;
-                userInDb.Sex = selectedUser.Sex;
-                userInDb.Address = selectedUser.Address;
-
-                var result = await UserManager.UpdateAsync(userInDb);
-                statusMessage = result.Succeeded
-                    ? "User information updated."
-                    : $"Error: {string.Join("; ", result.Errors.Select(e => e.Description))}";
-            }
-
-            selectedUser = null;
-        }
-    }
-
-    private void OnSubmitShowUser(ApplicationUser user)
-    {
-        selectedUser = user;
-    }
-
-    private void HideUserModal()
-    {
-        selectedUser = null;
-    }
-    private void ConfirmDeleteUser(string userId)
-    {
-        deleteUserId = userId;
-    }
-
-    private void CancelDelete()
-    {
-        deleteUserId = null;
-    }
-
-    private async Task DeleteUserConfirmed()
-    {
-        if (!string.IsNullOrEmpty(deleteUserId))
-        {
-            var user = await UserManager.FindByIdAsync(deleteUserId);
-            if (user != null)
-            {
-                var result = await UserManager.DeleteAsync(user);
-                if (result.Succeeded)
-                {
-                    statusMessage = $"User '{user.UserName}' has been deleted.";
-                    usersWithRoles.RemoveAll(u => u.User.Id == deleteUserId);
-                }
-                else
-                {
-                    statusMessage = $"Error deleting user: {string.Join(", ", result.Errors.Select(e => e.Description))}";
-                }
-            }
-        }
-
-        deleteUserId = null;
-    }
 }

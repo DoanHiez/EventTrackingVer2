@@ -110,7 +110,7 @@
         user = await UserManager.FindByIdAsync(UserId);
         if (user == null)
         {
-            statusMessage = "User not found.";
+            statusMessage = "Không tìm thấy người dùng.";
             return;
         }
 
@@ -178,7 +178,7 @@
         await UserManager.RemoveFromRolesAsync(user, currentRoles);
         await UserManager.AddToRoleAsync(user, newrole.Name);
         // If all updates were successful, redirect with success message
-        RedirectManager.RedirectToCurrentPageWithStatus("User information updated successfully.", HttpContext);
+        RedirectManager.RedirectToCurrentPageWithStatus("Cập nhật thông tin người dùng thành công.", HttpContext);
     }
 
 
