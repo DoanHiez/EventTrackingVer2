@@ -2,14 +2,16 @@
 @using System.Net.Mail
 @using System.Net
 @using System.ComponentModel.DataAnnotations
-@using Radzen
+@using EventTrackingVer2.Data
+@inject ApplicationDbContext Db
+@inject NavigationManager Navigation
 
 @rendermode InteractiveServer
 
 <div class="py-5 min-vh-100 d-flex justify-content-center align-items-center px-3">
-    <div class="card email-card">
+    <div class="card email-card shadow p-4 w-100" style="max-width: 700px;">
         <h2 class="text-center mb-4 fw-bold text-dark fs-2">
-             Compose & Send Event Invitation
+            Compose & Send Event Invitation
         </h2>
 
         <EditForm Model="@model" OnValidSubmit="SendEmail">
@@ -17,13 +19,13 @@
             <ValidationSummary class="text-danger mb-3" />
 
             <div class="mb-4">
-                <label class="form-label fw-semibold"> Recipient's Email</label>
+                <label class="form-label fw-semibold">Recipient's Email</label>
                 <InputText class="form-control form-control-lg" @bind-Value="model.ToEmail" />
                 <ValidationMessage For="@(() => model.ToEmail)" class="text-danger" />
             </div>
 
             <div class="mb-4">
-                <label class="form-label fw-semibold"> Subject</label>
+                <label class="form-label fw-semibold">Subject</label>
                 <InputText class="form-control form-control-lg" @bind-Value="model.Subject" />
                 <ValidationMessage For="@(() => model.Subject)" class="text-danger" />
             </div>
@@ -34,14 +36,16 @@
                 <ValidationMessage For="@(() => model.Body)" class="text-danger" />
             </div>
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-lg btn-primary px-5 shadow-sm"> Send Email</button>
+            <div class="d-flex justify-content-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg px-5 py-2 rounded-pill shadow-lg fw-semibold">
+                    <i class="bi bi-send me-2"></i> Send Email
+                </button>
             </div>
         </EditForm>
 
         @if (!string.IsNullOrEmpty(statusMessage))
         {
-            <div class="alert alert-info mt-4 text-center">@statusMessage</div>
+            <div class="alert alert-danger mt-4 text-center">@statusMessage</div>
         }
     </div>
 </div>
@@ -70,11 +74,24 @@
 
             mail.To.Add(model.ToEmail);
             await smtp.SendMailAsync(mail);
-            statusMessage = " Email sent successfully!";
+
+            // Lưu thông tin email vào DB
+            var sentEmail = new SentEmail
+            {
+                ToEmail = model.ToEmail,
+                Subject = model.Subject,
+                Body = model.Body,
+                SentAt = DateTime.Now
+            };
+
+            Db.SentEmails.Add(sentEmail);
+            await Db.SaveChangesAsync();
+
+            Navigation.NavigateTo("/email-success");
         }
         catch (Exception ex)
         {
-            statusMessage = $" Failed to send email: {ex.Message}";
+            statusMessage = $"Failed to send email: {ex.Message}";
         }
     }
 
