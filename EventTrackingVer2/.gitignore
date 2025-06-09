@@ -1,11 +1,14 @@
-# Build results
+# Ignore Visual Studio and build files
+.vs/
 bin/
 obj/
 *.dll
-*.exe
 *.pdb
 *.cache
-*.log
+*.suo
+*.vsidx
+*.db
+
 
 # Visual Studio files
 .vs/
