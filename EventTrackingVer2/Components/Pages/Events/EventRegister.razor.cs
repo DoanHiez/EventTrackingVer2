@@ -74,7 +74,7 @@ namespace EventTrackingVer2.Components.Pages.Events
                     await DbContext.SaveChangesAsync();
                     Console.WriteLine("📥 Event and guest list saved successfully.");
                     message = $"✅ Event registered & {guests.Count} guests saved.";
-                    NavigationManager.NavigateTo("/events-list");
+                    NavigationManager.NavigateTo($"/email-template?eventId={eventModel.EventId}");
                 }
                 else
                 {

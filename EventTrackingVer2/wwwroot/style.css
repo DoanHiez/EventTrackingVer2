@@ -186,3 +186,7 @@
 	background-color: #fff;
 	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
 }
+
+.btn-brs{
+	border-radius:50% !important;
+}

@@ -21,18 +21,19 @@
 {
     <RadzenDataGrid Data="@FilteredUsers" TItem="UserWithRole" ColumnWidth="200px" AllowFiltering="true" AllowPaging="false" AllowSorting="false">
         <Columns>
-            <RadzenDataGridColumn TItem="UserWithRole" Property="User.UserName" Title="Username" Filterable="true" />
-            <RadzenDataGridColumn TItem="UserWithRole" Property="User.Email" Title="Email" Filterable="true" />
-            <RadzenDataGridColumn TItem="UserWithRole" Property="User.PhoneNumber" Title="Phone" Filterable="true" />
+            <RadzenDataGridColumn TItem="UserWithRole" Property="User.UserName" Title="User name" Filterable="true" />
+            <RadzenDataGridColumn TItem="UserWithRole" Property="User.Email" Title="Email" Filterable="true" Width="250px" />
+            <RadzenDataGridColumn TItem="UserWithRole" Property="User.EmailConfirmed" Title="Email confirmed" Filterable="true" Width="150px" />
+            <RadzenDataGridColumn TItem="UserWithRole" Property="User.PhoneNumber" Title="Phone" Filterable="true" Width="150px" />
             <RadzenDataGridColumn TItem="UserWithRole" Title="Role">
                 <Template Context="user">
-                    <RadzenDropDown Data="@allRoles" @bind-Value="user.SelectedRole" Style="width: 100%;" Change="@(async (object value) => await OnRoleChangedAsync(new ChangeEventArgs { Value = value }, user))" />
+                    @user.SelectedRole
                 </Template>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="UserWithRole" Title="Action">
+            <RadzenDataGridColumn TItem="UserWithRole" Title="Action" Width="120px">
                 <Template Context="user">
-                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" class="rz-my-1 rz-ms-1" Click="@(args => OnSubmitShowUser(user.User))" @onclick:stopPropagation="true" />
-                    <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Size="ButtonSize.Medium" Shade="Shade.Lighter" class="rz-my-1 rz-ms-1" Click="@(args => DeleteUser(user.User.Id))" @onclick:stopPropagation="true" />
+                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" class="rz-my-1 rz-ms-1 btn-brs" Click="@(args => OnSubmitShowUser(user.User))" @onclick:stopPropagation="true" />
+                    <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Size="ButtonSize.Medium" Shade="Shade.Lighter" class="rz-my-1 rz-ms-1 btn-brs" Click="@(args => DeleteUser(user.User.Id))" @onclick:stopPropagation="true" />
                 </Template>
             </RadzenDataGridColumn>
         </Columns>
@@ -82,6 +83,16 @@ else
                         <div class="mb-3">
                             <label class="form-label">Address</label>
                             <InputText class="form-control" @bind-Value="selectedUser.Address" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <InputSelect class="form-select" @bind-Value="selectedUser.SelectedRole">
+                                <option value="">-- Select role --</option>
+                                @foreach (var role in allRoles)
+                                {
+                                    <option value="@role">@role</option>
+                                }
+                            </InputSelect>
                         </div>
                     </div>
                     <div class="modal-footer">
