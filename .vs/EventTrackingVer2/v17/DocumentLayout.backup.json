@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Intern\\EventTrackingVer2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Data\\Migrations\\20250609042638_AddGuestTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EventTrackingVer2\\Data\\Migrations\\20250609042638_AddGuestTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20250609042638_AddGuestTable.cs",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Data\\Migrations\\20250609042638_AddGuestTable.cs",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Data\\Migrations\\20250609042638_AddGuestTable.cs",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Data\\Migrations\\20250609042638_AddGuestTable.cs",
+              "RelativeToolTip": "EventTrackingVer2\\Data\\Migrations\\20250609042638_AddGuestTable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T04:26:38.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.razor",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\App.razor",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\App.razor",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\App.razor",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-09T04:25:29.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\_Imports.razor",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\_Imports.razor",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-09T04:25:29.888Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

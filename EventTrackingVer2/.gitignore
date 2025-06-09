@@ -1,3 +1,4 @@
+
 # Ignore Visual Studio and build files
 .vs/
 bin/
@@ -38,3 +39,6 @@ ScaffoldingReadMe.txt
 # publish directory
 wwwroot/
 dist/
+
+.vs/
+
