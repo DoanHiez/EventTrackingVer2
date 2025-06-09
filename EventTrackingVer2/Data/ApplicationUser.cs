@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EventTrackingVer2.Data
 {
@@ -7,6 +8,9 @@ namespace EventTrackingVer2.Data
     {
         public string? Sex { get; set; }
         public string? Address { get; set; }
+
+        [NotMapped]
+        public string SelectedRole { get; set; } = "";
     }
 
 }

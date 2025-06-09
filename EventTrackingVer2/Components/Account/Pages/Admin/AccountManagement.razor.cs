@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
 using Radzen.Blazor;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EventTrackingVer2.Components.Account.Pages.Admin;
 [Authorize(Roles = "Admin")]
@@ -66,8 +67,18 @@ public partial class AccountManagementBase : ComponentBase
 
         user.SelectedRole = e.Value.ToString()!;
         await UpdateUserRoleAsync(user);
-        await InvokeAsync(StateHasChanged);
+
+        var updatedRoles = await UserManager.GetRolesAsync(user.User);
+        var newRole = updatedRoles.FirstOrDefault() ?? "";
+        var target = usersWithRoles.FirstOrDefault(u => u.User.Id == user.User.Id);
+        if (target != null)
+        {
+            target.SelectedRole = newRole;
+        }
+        await grid?.Reload();
     }
+
+
 
     protected async Task UpdateUserRoleAsync(UserWithRole userWithRole)
     {
@@ -109,15 +120,42 @@ public partial class AccountManagementBase : ComponentBase
                 userInDb.Sex = selectedUser.Sex;
                 userInDb.Address = selectedUser.Address;
 
+                // Update role
+                var currentRoles = await UserManager.GetRolesAsync(userInDb);
+                var newRole = selectedUser.SelectedRole;
+
+                if (currentRoles.Any())
+                {
+                    var removeResult = await UserManager.RemoveFromRolesAsync(userInDb, currentRoles);
+                    if (!removeResult.Succeeded)
+                    {
+                        statusMessage = $"Failed to remove old roles: {string.Join(", ", removeResult.Errors.Select(e => e.Description))}";
+                        return;
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(newRole))
+                {
+                    var addResult = await UserManager.AddToRoleAsync(userInDb, newRole);
+                    if (!addResult.Succeeded)
+                    {
+                        statusMessage = $"Failed to add new role: {string.Join(", ", addResult.Errors.Select(e => e.Description))}";
+                        return;
+                    }
+                }
+
                 var result = await UserManager.UpdateAsync(userInDb);
                 statusMessage = result.Succeeded
-                    ? "User information updated successfully."
+                    ? "User information and role updated successfully."
                     : $"Error: {string.Join("; ", result.Errors.Select(e => e.Description))}";
             }
 
             selectedUser = null;
+
+            await RefreshUserListAsync();
         }
     }
+
 
     protected async Task DeleteUser(string userId)
     {
@@ -139,7 +177,16 @@ public partial class AccountManagementBase : ComponentBase
 
     protected void OnSubmitShowUser(ApplicationUser user)
     {
-        selectedUser = user;
+        selectedUser = new ApplicationUser
+        {
+            Id = user.Id,
+            UserName = user.UserName,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber,
+            Address = user.Address,
+            Sex = user.Sex,
+            SelectedRole = usersWithRoles.FirstOrDefault(u => u.User.Id == user.Id)?.SelectedRole ?? ""
+        };
     }
 
     protected async Task LoadUserData(LoadDataArgs args)
@@ -169,9 +216,27 @@ public partial class AccountManagementBase : ComponentBase
         pagedUsers = query.Skip(args.Skip ?? 0).Take(args.Top ?? 10).ToList();
     }
 
+    private async Task RefreshUserListAsync()
+    {
+        var refreshedList = new List<UserWithRole>();
+        var users = await UserManager.Users.ToListAsync();
+        foreach (var user in users)
+        {
+            var roles = await UserManager.GetRolesAsync(user);
+            refreshedList.Add(new UserWithRole
+            {
+                User = user,
+                SelectedRole = roles.FirstOrDefault() ?? ""
+            });
+        }
+
+        usersWithRoles = refreshedList;
+
+        await InvokeAsync(StateHasChanged);
+    }
+
     protected void HideUserModal()
     {
         selectedUser = null;
     }
 }
-
