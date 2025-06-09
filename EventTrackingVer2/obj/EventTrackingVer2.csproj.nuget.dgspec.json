@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\code\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj": {}
   },
   "projects": {
@@ -13,32 +12,14 @@
         "projectPath": "C:\\code\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj",
         "packagesPath": "C:\\Users\\duong\\.nuget\\packages\\",
         "outputPath": "C:\\code\\EventTrackingVer02\\EventTrackingVer2\\obj\\",
-=======
-    "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj": {}
-  },
-  "projects": {
-    "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj",
-        "projectName": "EventTrackingVer2",
-        "projectPath": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\EventTrackingVer2.csproj",
-        "packagesPath": "C:\\Users\\Anh\\.nuget\\packages\\",
-        "outputPath": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\obj\\",
->>>>>>> c9040b60985907cf7cb7b48f94d24c8a3bd8c67a
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\DevExpress 24.2\\Components\\Offline Packages",
+          "C:\\Program Files\\DevExpress 24.1\\Components\\Offline Packages",
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
           "C:\\Users\\duong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 24.1.config",
-=======
-          "C:\\Users\\Anh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 24.2.config",
->>>>>>> c9040b60985907cf7cb7b48f94d24c8a3bd8c67a
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -47,12 +28,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-<<<<<<< HEAD
           "C:\\Program Files\\DevExpress 24.1\\Components\\System\\Components\\packages": {},
-=======
-          "C:\\Program Files\\DevExpress 24.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
->>>>>>> c9040b60985907cf7cb7b48f94d24c8a3bd8c67a
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

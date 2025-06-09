@@ -6,5 +6,5 @@ wwwroot\image\atc1.png
 wwwroot\image\atc2.png
 wwwroot\image\logoAET1.jpg
 wwwroot\image\logoAET2.jpg
-wwwroot\uploads\05405cb2-d7f0-4d61-a811-2d70ff360b8a.png
 wwwroot\style.css
+wwwroot\uploads\05405cb2-d7f0-4d61-a811-2d70ff360b8a.png
