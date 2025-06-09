@@ -1,3 +1,4 @@
+using EventTrackingVer2.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,8 @@ namespace EventTrackingVer2.Data
         {
             base.OnModelCreating(builder);
         }
+        public DbSet<Event> Events { get; set; }
 
+        public DbSet<Guest> Guests { get; set; }
     }
 }

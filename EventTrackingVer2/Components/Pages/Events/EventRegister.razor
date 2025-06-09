@@ -1,0 +1,61 @@
+﻿@page "/events-register"
+@rendermode InteractiveServer
+@attribute [Authorize]
+
+@using Microsoft.AspNetCore.Authorization
+@using EventTrackingVer2.Models
+@using Radzen
+@using Radzen.Blazor
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject EventTrackingVer2.Data.ApplicationDbContext DbContext
+@inject NavigationManager NavigationManager
+
+<h2 class="mb-4 text-center">Event Registration</h2>
+
+<EditForm Model="eventModel" OnValidSubmit="HandleValidSubmit" FormName="EventRegistrationForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group mb-2">
+        <label>Event Name:</label>
+        <InputText class="form-control" @bind-Value="eventModel.EventName" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Organizer:</label>
+        <InputText class="form-control" @bind-Value="eventModel.Organizer" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Location:</label>
+        <InputText class="form-control" @bind-Value="eventModel.Location" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Start Time:</label>
+        <InputDate class="form-control" @bind-Value="eventModel.StartTime" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>End Time:</label>
+        <InputDate class="form-control" @bind-Value="eventModel.EndTime" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Number of Participants:</label>
+        <InputNumber class="form-control" @bind-Value="eventModel.NumberOfParticipants" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Upload Guest List (.csv):</label>
+        <InputFile OnChange="HandleFileSelected" accept=".csv" />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Register</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-info mt-3">@message</div>
+}

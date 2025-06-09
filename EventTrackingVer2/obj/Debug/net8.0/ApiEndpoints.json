@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityComponentsEndpointRouteBuilderExtensions\u002B\u003C\u003Ec",
+    "ContainingType": "EventTrackingVer2.Components.Account.IdentityComponentsEndpointRouteBuilderExtensions\u002B\u003C\u003Ec",
     "Method": "\u003CMapAdditionalIdentityEndpoints\u003Eb__0_1",
     "RelativePath": "Account/Logout",
     "HttpMethod": "POST",
@@ -22,7 +22,7 @@
     ]
   },
   {
-    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityComponentsEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__DisplayClass0_0",
+    "ContainingType": "EventTrackingVer2.Components.Account.IdentityComponentsEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__DisplayClass0_0",
     "Method": "\u003CMapAdditionalIdentityEndpoints\u003Eb__3",
     "RelativePath": "Account/Manage/DownloadPersonalData",
     "HttpMethod": "POST",
@@ -38,7 +38,7 @@
     ]
   },
   {
-    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityComponentsEndpointRouteBuilderExtensions\u002B\u003C\u003Ec",
+    "ContainingType": "EventTrackingVer2.Components.Account.IdentityComponentsEndpointRouteBuilderExtensions\u002B\u003C\u003Ec",
     "Method": "\u003CMapAdditionalIdentityEndpoints\u003Eb__0_2",
     "RelativePath": "Account/Manage/LinkExternalLogin",
     "HttpMethod": "POST",
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityComponentsEndpointRouteBuilderExtensions\u002B\u003C\u003Ec",
+    "ContainingType": "EventTrackingVer2.Components.Account.IdentityComponentsEndpointRouteBuilderExtensions\u002B\u003C\u003Ec",
     "Method": "\u003CMapAdditionalIdentityEndpoints\u003Eb__0_0",
     "RelativePath": "Account/PerformExternalLogin",
     "HttpMethod": "POST",

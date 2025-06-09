@@ -19,6 +19,8 @@ builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 builder.Services.AddScoped<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
+builder.Services.AddRadzenComponents();
+
 // Use for admin pages 
 builder.Services.AddAuthorization();
 

@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "D:\\Intern\\EventTrackingVer2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Data\\Migrations\\20250609045649_AddEventAndGuestTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EventTrackingVer2\\Data\\Migrations\\20250609045649_AddEventAndGuestTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\models\\guestcsvrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\models\\guestcsvrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\components\\pages\\events\\eventregister.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\pages\\events\\eventregister.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\components\\pages\\events\\eventlist.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\pages\\events\\eventlist.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\components\\pages\\events\\eventlist.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\pages\\events\\eventlist.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\components\\pages\\events\\eventregister.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\pages\\events\\eventregister.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|d:\\intern\\eventtrackingver2\\eventtrackingver2\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +43,93 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "App.razor",
-              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\App.razor",
-              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\App.razor",
-              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\App.razor",
-              "RelativeToolTip": "EventTrackingVer2\\Components\\App.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-09T04:25:29.613Z",
+              "Title": "20250609045649_AddEventAndGuestTable.cs",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Data\\Migrations\\20250609045649_AddEventAndGuestTable.cs",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Data\\Migrations\\20250609045649_AddEventAndGuestTable.cs",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Data\\Migrations\\20250609045649_AddEventAndGuestTable.cs",
+              "RelativeToolTip": "EventTrackingVer2\\Data\\Migrations\\20250609045649_AddEventAndGuestTable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T04:56:49.374Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "_Imports.razor",
-              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\_Imports.razor",
-              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\_Imports.razor",
-              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\_Imports.razor",
-              "RelativeToolTip": "EventTrackingVer2\\Components\\_Imports.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "GuestCsvRow.cs",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Models\\GuestCsvRow.cs",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Models\\GuestCsvRow.cs",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Models\\GuestCsvRow.cs",
+              "RelativeToolTip": "EventTrackingVer2\\Models\\GuestCsvRow.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T04:55:54.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EventRegister.razor.cs",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor.cs",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor.cs",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor.cs",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAtwDcAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T04:49:04.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "EventTrackingVer2\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T04:48:35.435Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EventRegister.razor",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-09T04:25:29.888Z"
+              "WhenOpened": "2025-06-09T04:48:31.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EventList.razor.cs",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor.cs",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor.cs",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor.cs",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T04:48:25.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EventList.razor",
+              "DocumentMoniker": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor",
+              "ToolTip": "D:\\Intern\\EventTrackingVer2\\EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-09T04:48:16.143Z",
+              "EditorCaption": ""
             }
           ]
         }

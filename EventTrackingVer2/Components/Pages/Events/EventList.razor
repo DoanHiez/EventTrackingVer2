@@ -1,0 +1,82 @@
+﻿@page "/events-list"
+@using EventTrackingVer2.Models
+@using Microsoft.EntityFrameworkCore
+@using System.Globalization
+@inject EventTrackingVer2.Data.ApplicationDbContext DbContext
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h2 class="text-center fw-bold mb-4">📋 Event List</h2>
+
+@if (isLoading)
+{
+    <p class="text-center">Loading events...</p>
+}
+else if (eventList == null || !eventList.Any())
+{
+    <div class="alert alert-info text-center">No events found.</div>
+}
+else
+{
+    <RadzenDataGrid @ref="eventGrid"
+                    Data="@eventList"
+                    TItem="Event"
+                    AllowFiltering="true"
+                    AllowPaging="true"
+                    PageSize="5"
+                    AllowSorting="true">
+
+        <Columns>
+            <RadzenDataGridColumn Width="50px" Title="#" Filterable="false" Sortable="false" TextAlign="TextAlign.Center">
+                <Template Context="data">
+                    @(eventList.IndexOf(data) + 1)
+                </Template>
+            </RadzenDataGridColumn>
+
+            <RadzenDataGridColumn Property="EventName" Title="Event Name">
+                <Template Context="ev">
+                    <strong>@ev.EventName</strong>
+                </Template>
+            </RadzenDataGridColumn>
+
+            <RadzenDataGridColumn Property="Organizer" Title="Organizer">
+                <Template Context="ev">
+                    @ev.Organizer
+                </Template>
+            </RadzenDataGridColumn>
+
+            <RadzenDataGridColumn Property="Location" Title="Location">
+                <Template Context="ev">
+                    @ev.Location
+                </Template>
+            </RadzenDataGridColumn>
+
+            <RadzenDataGridColumn Property="NumberOfParticipants" Title="Participants" TextAlign="TextAlign.Center">
+                <Template Context="ev">
+                    @ev.NumberOfParticipants
+                </Template>
+            </RadzenDataGridColumn>
+
+            <RadzenDataGridColumn Title="Time">
+                <Template Context="ev">
+                    @if (ev.StartTime.HasValue && ev.EndTime.HasValue)
+                    {
+                        <span>@ev.StartTime.Value.ToString("dd/MM/yyyy, HH:mm") – @ev.EndTime.Value.ToString("HH:mm")</span>
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </Template>
+            </RadzenDataGridColumn>
+
+            <RadzenDataGridColumn Width="120px" Title="Details" TextAlign="TextAlign.Center">
+                <Template Context="ev">
+                    <a href="@($"/events/detail/{ev.EventId}")" class="btn btn-info text-white">
+                        <i class="fas fa-info-circle"></i> Details
+                    </a>
+                </Template>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+}
