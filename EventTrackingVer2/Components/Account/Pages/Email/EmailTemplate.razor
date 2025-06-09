@@ -1,0 +1,93 @@
+﻿@page "/email-template"
+@using System.Net.Mail
+@using System.Net
+@using System.ComponentModel.DataAnnotations
+@using Radzen
+
+@rendermode InteractiveServer
+
+<div class="py-5 min-vh-100 d-flex justify-content-center align-items-center px-3">
+    <div class="card email-card">
+        <h2 class="text-center mb-4 fw-bold text-dark fs-2">
+             Compose & Send Event Invitation
+        </h2>
+
+        <EditForm Model="@model" OnValidSubmit="SendEmail">
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger mb-3" />
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold"> Recipient's Email</label>
+                <InputText class="form-control form-control-lg" @bind-Value="model.ToEmail" />
+                <ValidationMessage For="@(() => model.ToEmail)" class="text-danger" />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold"> Subject</label>
+                <InputText class="form-control form-control-lg" @bind-Value="model.Subject" />
+                <ValidationMessage For="@(() => model.Subject)" class="text-danger" />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Email Content</label>
+                <RadzenHtmlEditor @bind-Value="model.Body" style="height: 550px;" />
+                <ValidationMessage For="@(() => model.Body)" class="text-danger" />
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-lg btn-primary px-5 shadow-sm"> Send Email</button>
+            </div>
+        </EditForm>
+
+        @if (!string.IsNullOrEmpty(statusMessage))
+        {
+            <div class="alert alert-info mt-4 text-center">@statusMessage</div>
+        }
+    </div>
+</div>
+
+@code {
+    EmailModel model = new();
+    string? statusMessage;
+
+    async Task SendEmail()
+    {
+        try
+        {
+            using var smtp = new SmtpClient("smtp.gmail.com", 587)
+            {
+                EnableSsl = true,
+                Credentials = new NetworkCredential("event.tracking2025@gmail.com", "nmqu kwtc ynor vfvy")
+            };
+
+            var mail = new MailMessage
+            {
+                From = new MailAddress("event.tracking2025@gmail.com"),
+                Subject = model.Subject,
+                Body = model.Body,
+                IsBodyHtml = true
+            };
+
+            mail.To.Add(model.ToEmail);
+            await smtp.SendMailAsync(mail);
+            statusMessage = " Email sent successfully!";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $" Failed to send email: {ex.Message}";
+        }
+    }
+
+    public class EmailModel
+    {
+        [Required(ErrorMessage = "Please enter the recipient's email.")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        public string ToEmail { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter the subject.")]
+        public string Subject { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter the email content.")]
+        public string Body { get; set; } = "";
+    }
+}

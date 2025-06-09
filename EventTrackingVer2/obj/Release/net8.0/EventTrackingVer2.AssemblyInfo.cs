@@ -13,13 +13,9 @@ using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-EventTrackingVer2-a9752385-e37e-498c-ae6d-681cf909cc4b")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("EventTrackingVer2")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd9c8a6352206de339053840568640217e51da61")]
-=======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c3a66ef4b03e1027c3990fb84109320b92c967e")]
->>>>>>> c9040b60985907cf7cb7b48f94d24c8a3bd8c67a
 [assembly: System.Reflection.AssemblyProductAttribute("EventTrackingVer2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EventTrackingVer2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

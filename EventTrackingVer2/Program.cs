@@ -58,6 +58,8 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>{
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+builder.Services.AddRadzenComponents();
+builder.Services.AddRadzenComponents().AddRadzenCookieThemeService();
 
 var app = builder.Build();
 
@@ -83,5 +85,25 @@ app.MapRazorComponents<App>()
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
+app.MapPost("/upload/image", async (HttpRequest request) =>
+{
+    var form = await request.ReadFormAsync();
+    var file = form.Files["file"];
 
+    if (file is null || file.Length == 0)
+        return Results.BadRequest("No file uploaded.");
+
+    var uploadsFolder = Path.Combine(app.Environment.WebRootPath, "uploads");
+    if (!Directory.Exists(uploadsFolder))
+        Directory.CreateDirectory(uploadsFolder);
+
+    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+    var filePath = Path.Combine(uploadsFolder, fileName);
+
+    using var stream = new FileStream(filePath, FileMode.Create);
+    await file.CopyToAsync(stream);
+
+    var fileUrl = $"/uploads/{fileName}";
+    return Results.Ok(new { Url = fileUrl });
+});
 app.Run();
