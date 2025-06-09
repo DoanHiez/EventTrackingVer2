@@ -3,8 +3,33 @@
   "WorkspaceRootPath": "E:\\EventTracking\\EventTrackingVer02\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\components\\account\\pages\\email\\emailtemplate.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\account\\pages\\email\\emailtemplate.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\components\\account\\pages\\email\\emailtemplate.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\account\\pages\\email\\emailtemplate.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\components\\pages\\events\\eventdetail.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\pages\\events\\eventdetail.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_EventTrackingVer2_a9752385_e37e_498c_ae6d_681cf909cc4b/True/SqlTable/dbo.Events.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\components\\pages\\events\\eventdetail.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\pages\\events\\eventdetail.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_EventTrackingVer2_a9752385_e37e_498c_ae6d_681cf909cc4b/True/SqlTable/dbo.SentEmails.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_EventTrackingVer2_a9752385_e37e_498c_ae6d_681cf909cc4b/True/SqlTable/dbo.Guests.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\components\\pages\\events\\eventregister.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\pages\\events\\eventregister.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\components\\account\\pages\\email\\emailsuccess.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -17,10 +42,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\components\\account\\identitynoopemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\account\\identitynoopemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\components\\pages\\events\\eventregister.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|solutionrelative:eventtrackingver2\\components\\pages\\events\\eventregister.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8610C69F-4917-4228-AEB6-4F7511B31329}|EventTrackingVer2\\EventTrackingVer2.csproj|e:\\eventtracking\\eventtrackingver02\\eventtrackingver2\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -67,19 +88,88 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "EmailTemplate.razor.cs",
+              "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailTemplate.razor.cs",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailTemplate.razor.cs",
+              "ToolTip": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailTemplate.razor.cs",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailTemplate.razor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGYAAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T15:05:12.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "dbo.Events [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_EventTrackingVer2_a9752385_e37e_498c_ae6d_681cf909cc4b/True/SqlTable/dbo.Events.sql",
+              "ToolTip": "dbo.Events [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-06-09T14:57:58.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "dbo.Guests [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_EventTrackingVer2_a9752385_e37e_498c_ae6d_681cf909cc4b/True/SqlTable/dbo.Guests.sql",
+              "ToolTip": "dbo.Guests [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-06-09T14:57:46.033Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "dbo.SentEmails [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_EventTrackingVer2_a9752385_e37e_498c_ae6d_681cf909cc4b/True/SqlTable/dbo.SentEmails.sql",
+              "ToolTip": "dbo.SentEmails [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-06-09T14:57:12.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EventDetail.razor.cs",
+              "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventDetail.razor.cs",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventDetail.razor.cs",
+              "ToolTip": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventDetail.razor.cs",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\Pages\\Events\\EventDetail.razor.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAmwIEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T13:31:43.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EventDetail.razor",
+              "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventDetail.razor",
+              "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventDetail.razor",
+              "ToolTip": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventDetail.razor",
+              "RelativeToolTip": "EventTrackingVer2\\Components\\Pages\\Events\\EventDetail.razor",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACsAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-09T13:25:17.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "EmailTemplate.razor",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailTemplate.razor",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailTemplate.razor",
               "ToolTip": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailTemplate.razor",
               "RelativeToolTip": "EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailTemplate.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-09T08:03:46.035Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "EmailSuccess.razor",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailSuccess.razor",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailSuccess.razor",
@@ -87,12 +177,11 @@
               "RelativeToolTip": "EventTrackingVer2\\Components\\Account\\Pages\\Email\\EmailSuccess.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-09T08:03:45.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T08:03:45.105Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "IdentityNoOpEmailSender.cs",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Account\\IdentityNoOpEmailSender.cs",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Account\\IdentityNoOpEmailSender.cs",
@@ -100,12 +189,11 @@
               "RelativeToolTip": "EventTrackingVer2\\Components\\Account\\IdentityNoOpEmailSender.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T08:01:54.074Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T08:01:54.074Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "ResetPassword.razor",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Account\\Pages\\ResetPassword.razor",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Account\\Pages\\ResetPassword.razor",
@@ -113,12 +201,11 @@
               "RelativeToolTip": "EventTrackingVer2\\Components\\Account\\Pages\\ResetPassword.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAC6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-09T08:00:47.85Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T08:00:47.85Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "20250609071647_Update.cs",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Data\\Migrations\\20250609071647_Update.cs",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Data\\Migrations\\20250609071647_Update.cs",
@@ -126,12 +213,11 @@
               "RelativeToolTip": "EventTrackingVer2\\Data\\Migrations\\20250609071647_Update.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T07:16:47.598Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T07:16:47.598Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\appsettings.json",
               "RelativeDocumentMoniker": "EventTrackingVer2\\appsettings.json",
@@ -143,7 +229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "20250609045649_AddEventAndGuestTable.cs",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Data\\Migrations\\20250609045649_AddEventAndGuestTable.cs",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Data\\Migrations\\20250609045649_AddEventAndGuestTable.cs",
@@ -155,7 +241,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "GuestCsvRow.cs",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Models\\GuestCsvRow.cs",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Models\\GuestCsvRow.cs",
@@ -167,20 +253,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "EventRegister.razor.cs",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor.cs",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor.cs",
               "ToolTip": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor.cs",
               "RelativeToolTip": "EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAAAEUAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-09T04:49:04.48Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Data\\ApplicationDbContext.cs",
@@ -188,12 +274,11 @@
               "RelativeToolTip": "EventTrackingVer2\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T04:48:35.435Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T04:48:35.435Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "EventRegister.razor",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor",
@@ -201,12 +286,11 @@
               "RelativeToolTip": "EventTrackingVer2\\Components\\Pages\\Events\\EventRegister.razor",
               "ViewState": "AgIAACQAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-09T04:48:31.295Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T04:48:31.295Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "EventList.razor.cs",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor.cs",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor.cs",
@@ -218,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "EventList.razor",
               "DocumentMoniker": "E:\\EventTracking\\EventTrackingVer02\\EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor",
               "RelativeDocumentMoniker": "EventTrackingVer2\\Components\\Pages\\Events\\EventList.razor",

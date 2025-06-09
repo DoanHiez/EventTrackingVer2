@@ -2,17 +2,16 @@
 @using System.Net.Mail
 @using System.Net
 @using System.ComponentModel.DataAnnotations
+@using EventTrackingVer2.Models
 @using Microsoft.EntityFrameworkCore
 @using EventTrackingVer2.Data
-@inject ApplicationDbContext Db
-@inject NavigationManager NavigationManager
 
 @rendermode InteractiveServer
 
 <div class="py-5 min-vh-100 d-flex justify-content-center align-items-center px-3">
     <div class="card email-card shadow p-4 w-100" style="max-width: 700px;">
         <h2 class="text-center mb-4 fw-bold text-dark fs-2">
-            Gửi Thư Mời Sự Kiện Hàng Loạt
+            Compose & Send Event Invitation
         </h2>
 
         <EditForm Model="@model" OnValidSubmit="SendEmailsToGuests">
@@ -20,20 +19,79 @@
             <ValidationSummary class="text-danger mb-3" />
 
             <div class="mb-4">
-                <label class="form-label fw-semibold">Tiêu đề Email</label>
+                <label class="form-label fw-semibold">Subject</label>
                 <InputText class="form-control form-control-lg" @bind-Value="model.Subject" />
                 <ValidationMessage For="@(() => model.Subject)" class="text-danger" />
             </div>
 
+            <div class="form-group mb-2">
+                <label>Event Name</label>
+                <InputText class="form-control" @bind-Value="eventDetail.EventName" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Organizer</label>
+                <InputText class="form-control" @bind-Value="eventDetail.Organizer" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Location</label>
+                <InputText class="form-control" @bind-Value="eventDetail.Location" />
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Start Time</label>
+                <InputDate class="form-control" @bind-Value="eventDetail.StartTime" />
+            </div>
+
             <div class="mb-4">
-                <label class="form-label fw-semibold">Nội dung Email</label>
+                <label class="form-label fw-semibold">Email Content</label>
                 <RadzenHtmlEditor @bind-Value="model.Body" style="height: 550px;" />
                 <ValidationMessage For="@(() => model.Body)" class="text-danger" />
             </div>
 
+            <label class="form-label fw-semibold">Guest List</label>
+            <RadzenDataGrid TItem="Guest"
+                            @ref="guestGrid"
+                            Data="@guestList"
+                            AllowPaging="true"
+                            PageSize="10"
+                            EditMode="DataGridEditMode.Single"
+                            CellClick="@OnCellClick"
+                            RowUpdate="@OnUpdateRow"
+                            ColumnWidth="180px">
+                <Columns>
+                    <RadzenDataGridColumn TItem="Guest" Property="GuestCode" Title="Guest Code" Width="120px" />
+                    <RadzenDataGridColumn TItem="Guest" Property="GuestName" Title="Guest Name" IsInEditMode="@IsEditing">
+                        <Template Context="g">@g.GuestName</Template>
+                        <EditTemplate Context="g">
+                            <RadzenTextBox @ref="editor" @bind-Value="g.GuestName" Style="width: 100%;" />
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Guest" Property="PhoneNumber" Title="Phone Number" IsInEditMode="@IsEditing">
+                        <Template Context="g">@g.PhoneNumber</Template>
+                        <EditTemplate Context="g">
+                            <RadzenTextBox @ref="editor" @bind-Value="g.PhoneNumber" Style="width: 100%;" />
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Guest" Property="Email" Title="Email" IsInEditMode="@IsEditing">
+                        <Template Context="g">@g.Email</Template>
+                        <EditTemplate Context="g">
+                            <RadzenTextBox @ref="editor" @bind-Value="g.Email" Style="width: 100%;" />
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-outline-primary btn-lg px-5 py-2 rounded-pill shadow-sm fw-semibold" @onclick="SaveAllChanges">
+                    <i class="bi bi-save me-2"></i> Update Changes
+                </button>
+            </div>
+
             <div class="d-flex justify-content-center mt-4">
                 <button type="submit" class="btn btn-success btn-lg px-5 py-2 rounded-pill shadow-lg fw-semibold">
-                    <i class="bi bi-people-fill me-2"></i> Gửi Email Hàng Loạt
+                    <i class="bi bi-send me-2"></i> Send Email
                 </button>
             </div>
         </EditForm>
@@ -45,85 +103,3 @@
     </div>
 </div>
 
-@code {
-    EmailModel model = new();
-    string? statusMessage;
-
-    [Parameter]
-    [SupplyParameterFromQuery]
-    public int? eventId { get; set; }
-
-    async Task SendEmailsToGuests()
-    {
-        try
-        {
-            if (eventId == null)
-            {
-                statusMessage = "❗ Không xác định được sự kiện để gửi email.";
-                return;
-            }
-
-            var guests = await Db.Guests
-                .Where(g => !string.IsNullOrEmpty(g.Email) && g.EventId == eventId)
-                .ToListAsync();
-
-            using var smtp = new SmtpClient("smtp.gmail.com", 587)
-            {
-                EnableSsl = true,
-                Credentials = new NetworkCredential("event.tracking2025@gmail.com", "nmqu kwtc ynor vfvy")
-            };
-
-            foreach (var guest in guests)
-            {
-                try
-                {
-                    var personalizedBody = model.Body
-                        .Replace("{{GuestName}}", guest.GuestName ?? "bạn")
-                        .Replace("{{PhoneNumber}}", guest.PhoneNumber ?? "")
-                        .Replace("{{GuestCode}}", guest.GuestCode ?? "")
-                        .Replace("{{Result}}", guest.Result ?? "");
-
-                    var mail = new MailMessage
-                    {
-                        From = new MailAddress("event.tracking2025@gmail.com"),
-                        Subject = model.Subject,
-                        Body = personalizedBody,
-                        IsBodyHtml = true
-                    };
-                    mail.To.Add(guest.Email);
-                    await smtp.SendMailAsync(mail);
-
-                    Db.SentEmails.Add(new SentEmail
-                    {
-                        ToEmail = guest.Email,
-                        Subject = model.Subject,
-                        Body = personalizedBody,
-                        SentAt = DateTime.Now
-                    });
-
-                    await Task.Delay(300);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Lỗi gửi đến {guest.Email}: {ex.Message}");
-                }
-            }
-
-            await Db.SaveChangesAsync();
-            NavigationManager.NavigateTo("/email-success");
-        }
-        catch (Exception ex)
-        {
-            statusMessage = $"❌ Gửi thất bại: {ex.Message}";
-        }
-    }
-
-    public class EmailModel
-    {
-        [Required(ErrorMessage = "Vui lòng nhập tiêu đề email.")]
-        public string Subject { get; set; } = "";
-
-        [Required(ErrorMessage = "Vui lòng nhập nội dung email.")]
-        public string Body { get; set; } = "";
-    }
-}
