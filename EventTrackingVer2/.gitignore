@@ -1,44 +1,16 @@
-
-# Ignore Visual Studio and build files
-.vs/
+# Build
 bin/
 obj/
 *.dll
 *.pdb
+*.exe
 *.cache
-*.suo
-*.vsidx
-*.db
 
-
-# Visual Studio files
+# Visual Studio
 .vs/
-*.suo
 *.user
-*.userosscache
-*.sln.docstates
-
-# Rider IDE
-.idea/
-
-# dotnet specific
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-# ASP.NET Scaffolding
-ScaffoldingReadMe.txt
+*.suo
 
 # Others
-*.dbmdl
-*.bak
+*.log
 *.tmp
-*.swp
-*.orig
-
-# publish directory
-wwwroot/
-dist/
-
-.vs/
-
