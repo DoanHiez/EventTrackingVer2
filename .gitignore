@@ -1,11 +1,11 @@
 # Visual Studio
-.vs/
+*.vs/
 *.user
 *.suo
 
 # Build
-bin/
-obj/
+*bin/
+*obj/
 *.dll
 *.pdb
 *.exe
@@ -16,3 +16,23 @@ obj/
 # System
 Thumbs.db
 .DS_Store
+/.vs/EventTrackingVer2/CopilotIndices/17.14.670.39694/
+/.vs/ProjectEvaluation/eventtrackingver2.metadata.v9.bin
+/.vs/ProjectEvaluation/eventtrackingver2.projects.v9.bin
+/.vs/ProjectEvaluation/eventtrackingver2.strings.v9.bin
+/.vs/EventTrackingVer2/CopilotIndices/17.14.670.39694/SemanticSymbols.db
+/.vs/EventTrackingVer2/DesignTimeBuild/.dtbcache.v2
+/.vs/EventTrackingVer2/v17/.futdcache.v2
+/.vs/EventTrackingVer2/v17/.suo
+/.vs/EventTrackingVer2/v17/DocumentLayout.backup.json
+/.vs/EventTrackingVer2/v17/DocumentLayout.json
+/EventTrackingVer2/obj/Debug/net8.0/EventTrackingVer2.AssemblyInfo.cs
+/EventTrackingVer2/obj/Debug/net8.0/EventTrackingVer2.AssemblyInfoInputs.cache
+/EventTrackingVer2/obj/Debug/net8.0/EventTrackingVer2.assets.cache
+/EventTrackingVer2/obj/Debug/net8.0/EventTrackingVer2.csproj.AssemblyReference.cache
+/EventTrackingVer2/obj/Debug/net8.0/EventTrackingVer2.GeneratedMSBuildEditorConfig.editorconfig
+/EventTrackingVer2/obj/Debug/net8.0/rpswa.dswa.cache.json
+/EventTrackingVer2/obj/EventTrackingVer2.csproj.nuget.dgspec.json
+/EventTrackingVer2/obj/EventTrackingVer2.csproj.nuget.g.props
+/EventTrackingVer2/obj/project.assets.json
+/EventTrackingVer2/obj/project.nuget.cache

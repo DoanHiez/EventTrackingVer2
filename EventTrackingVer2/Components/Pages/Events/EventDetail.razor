@@ -8,6 +8,7 @@
 @using EventTrackingVer2.Models
 @using Radzen
 @using Radzen.Blazor
+@using EventTrackingVer2.Components.Pages.Guest
 
 @inject IJSRuntime JSRuntime
 @inject NavigationManager Navigation
@@ -52,61 +53,9 @@
 
     <br />
 
-    <RadzenDataGrid TItem="Guest"
-                    @ref="guestGrid"
-                    Data="@guestList"
-                    AllowPaging="true"
-                    PageSize="10"
-                    EditMode="DataGridEditMode.Single"
-                    CellClick="@OnCellClick"
-                    RowUpdate="@OnUpdateRow"
-                    ColumnWidth="180px">
+    <GuestList Guests="@GuestList"
+               OnUpdateGuest="UpdateGuestAsync" />
 
-        <Columns>
-            <RadzenDataGridColumn TItem="Guest" Property="GuestCode" Title="Guest Code" Width="120px" />
-
-            <RadzenDataGridColumn TItem="Guest" Property="GuestName" Title="Guest Name" IsInEditMode="@IsEditing">
-                <Template Context="g">@g.GuestName</Template>
-                <EditTemplate Context="g">
-                    <RadzenTextBox @ref="editor" @bind-Value="g.GuestName" Style="width: 100%;" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-
-            <RadzenDataGridColumn TItem="Guest" Property="PhoneNumber" Title="Phone Number" IsInEditMode="@IsEditing">
-                <Template Context="g">@g.PhoneNumber</Template>
-                <EditTemplate Context="g">
-                    <RadzenTextBox @ref="editor" @bind-Value="g.PhoneNumber" Style="width: 100%;" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-
-            <RadzenDataGridColumn TItem="Guest" Property="Email" Title="Email" IsInEditMode="@IsEditing">
-                <Template Context="g">@g.Email</Template>
-                <EditTemplate Context="g">
-                    <RadzenTextBox @ref="editor" @bind-Value="g.Email" Style="width: 100%;" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-
-            <RadzenDataGridColumn TItem="Guest" Property="Status" Title="Status" IsInEditMode="@IsEditing">
-                <Template Context="g">@g.Status</Template>
-                <EditTemplate Context="g">
-                    <RadzenDropDown @ref="editor"
-                                    @bind-Value="g.Status"
-                                    Data="@statusOptions"
-                                    Style="width:100%;" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-
-            <RadzenDataGridColumn TItem="Guest" Property="Result" Title="Result" IsInEditMode="@IsEditing">
-                <Template Context="g">@g.Result</Template>
-                <EditTemplate Context="g">
-                    <RadzenDropDown @ref="editor"
-                                    @bind-Value="g.Result"
-                                    Data="@resultOptions"
-                                    Style="width:100%;" />
-                </EditTemplate>
-            </RadzenDataGridColumn>
-        </Columns>
-    </RadzenDataGrid>
 
     <button type="submit" class="btn btn-success mt-3">Save Changes</button>
 </EditForm>
